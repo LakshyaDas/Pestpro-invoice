@@ -10,7 +10,7 @@ export interface InvoiceData {
   // Company details
   companyName: string;
   companyAddress: string;
-
+  companyphone :string;
   // Invoice details
   invoiceNo: string;
   invoiceDate: string;
@@ -45,7 +45,7 @@ export interface InvoiceData {
 export const createEmptyInvoice = (): InvoiceData => ({
   companyName: 'PEST PRO SOLUTIONS',
   companyAddress: 'Near Jeevan Jyoti Hospital, Patel Nagar, Chhindwara 480001',
-
+  companyphone :'7987449147',
   invoiceNo: '',
   invoiceDate: new Date().toISOString().split('T')[0],
   contractDate: '',

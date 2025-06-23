@@ -4,6 +4,8 @@ import React from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import CertificatePDF from './CertificatePDF';
 import { InvoiceData } from '@/types/invoice';
+import { Button } from '@/components/ui/button';
+import { Loader2, Award } from 'lucide-react';
 
 interface Props {
   data: InvoiceData;
@@ -12,6 +14,7 @@ interface Props {
 const WarrantyCertificate = ({ data }: Props) => {
   const productName = data.items.map(item => item.particular).join(', ');
   const serialNo = data.invoiceNo || '—';
+  const fileName = `Warranty-Certificate-${data.customerName || 'Customer'}.pdf`;
 
   return (
     <div className="mt-8 p-6 border rounded-lg bg-white shadow-md max-w-5xl mx-auto">
@@ -75,10 +78,9 @@ const WarrantyCertificate = ({ data }: Props) => {
           <img src="/gold-medal.png" alt="seal" />
         </div>
         <div className="text-center">
-          <p className="text-sm"> Authorized Signature</p>
+          <p className="text-sm">Authorized Signature</p>
           <div className="w-32 border-t mt-2 mx-auto" />
-            <p className='font-bold'>Pest Pro Solutions</p>
-
+          <p className="font-bold">Pest Pro Solutions</p>
         </div>
       </div>
 
@@ -86,10 +88,29 @@ const WarrantyCertificate = ({ data }: Props) => {
       <div className="mt-10 text-center">
         <PDFDownloadLink
           document={<CertificatePDF data={data} />}
-          fileName={`Warranty-Certificate-${data.customerName}.pdf`}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+          fileName={fileName}
         >
-          {({ loading }) => loading ? 'Preparing PDF...' : 'Download Certificate'}
+          {
+            (({ loading }: { loading: boolean }) => (
+              <Button
+                size="lg"
+                className="w-full max-w-xs bg-blue-600 hover:bg-blue-700 text-white"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    Preparing Certificate...
+                  </>
+                ) : (
+                  <>
+                    <Award className="w-5 h-5 mr-2" />
+                    Download Certificate
+                  </>
+                )}
+              </Button>
+            )) as unknown as React.ReactElement
+          }
         </PDFDownloadLink>
       </div>
     </div>

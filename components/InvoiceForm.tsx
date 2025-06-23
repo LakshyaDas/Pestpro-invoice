@@ -275,7 +275,7 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                     <Input
                       type="number"
                       value={item.rate}
-                      onChange={(e) => updateItem(index, 'rate', parseFloat(e.target.value) || 0)}
+                      onChange={(e) => updateItem(index, 'rate', parseFloat(e.target.value) || 0.00)}
                       placeholder="0.00"
                     />
                   </div>

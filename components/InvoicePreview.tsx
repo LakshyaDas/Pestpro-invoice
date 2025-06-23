@@ -24,6 +24,11 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
               <p className="whitespace-pre-line">
                 {data.companyAddress || 'Near Jeevan Jyoti Hospital, Patel Nagar, Chhindwara 480001'}
               </p>
+              <p className="font-medium">Phone:</p>
+
+              <p className="whitespace-pre-line">
+                {data.companyphone || '7987449147'}
+              </p>
             </div>
           </div>
           <div className="text-right">
